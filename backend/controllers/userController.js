@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
+const { generateToken } = require('../utils/helpers');
 
 // Register user
 
@@ -50,6 +51,10 @@ const register = asyncHandler( async (req, res) => {
 
 const login = asyncHandler( async (req, res) => {
     const { email, password } = req.body;
+
+    if (!email || !password) {
+        throw new Error('Please add all fields');
+    }
     
     // check for user email
     const user = await User.findOne({email});
@@ -68,13 +73,7 @@ const login = asyncHandler( async (req, res) => {
 });
 
 
-// Generate JWT
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
-    });
-}
 
 module.exports = {
     register,
