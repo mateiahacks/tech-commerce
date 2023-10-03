@@ -1,10 +1,13 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      heii
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/register' element={<h1>mate</h1>}/>
+      </Routes>
+    </Router>
   );
 }
 
