@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { StyledForm } from '../styles/Forms.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from './Input';
 import Button from './Button';
+import { Loader } from '../styles/Global.styled';
 import { register } from '../../features/auth/authSlice';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({ email: '', name: '', password: '' });
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
 
   const { email, name, password } = formData;
 
@@ -54,7 +56,8 @@ const RegisterForm = () => {
         />
 
         <Button>
-          Sign up
+        {isLoading ? "" : "Sign up" }
+          {isLoading && <Loader size={15}/>} 
         </Button>
     </StyledForm>
   );

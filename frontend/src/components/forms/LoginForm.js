@@ -3,13 +3,15 @@ import { StyledForm } from '../styles/Forms.styled';
 import Input from './Input';
 import Button from './Button';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../features/auth/authSlice';
+import { Loader } from '../styles/Global.styled';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: '', name: '', password: '' });
   const dispatch = useDispatch();
-    
+  const { isLoading } = useSelector((state) => state.auth);  
+
   const { email, password } = formData;
 
   const handleChange = (e) => {
@@ -47,7 +49,8 @@ const LoginForm = () => {
           value={password}
         />
         <Button>
-          Sign in
+          {isLoading ? "" : "Sign in" }
+          {isLoading && <Loader size={15}/>} 
         </Button>
         <Link to={'/register'}>
             <p>Register here</p>
