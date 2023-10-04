@@ -52,6 +52,7 @@ const login = asyncHandler( async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
+        res.statusCode = 400;
         throw new Error('Please add all fields');
     }
     
@@ -98,9 +99,6 @@ const changePassword = asyncHandler( async (req, res) => {
         message: "Password changed successfully"
     });
 })
-
-
-
 
 module.exports = {
     register,
