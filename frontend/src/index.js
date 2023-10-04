@@ -5,6 +5,10 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -14,6 +18,7 @@ root.render(
     <Provider store={store}>
       <App />
     </Provider>
+    <ToastContainer/>
   </React.StrictMode>
 );
 
