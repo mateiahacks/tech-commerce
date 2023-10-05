@@ -5,6 +5,7 @@ export const Page = styled.div`
     height: 100vh;
     background-color: var(--backgroundColor);
     display: flex;
+    flex-direction: column;
 `
 
 export const Loader = styled.div`
