@@ -34,14 +34,18 @@ const register = asyncHandler( async (req, res) => {
     // Create user
     const user = await User.create({
         name, email, password: hashed,
-    });
+    }).select('-password');
 
     if(user) {
         res.status(201).json({
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id),
+            country: user?.country,
+            city: user?.city,
+            zipCode: user?.zipCode,
+            phone_number: user?.phone_number,
+            token: generateToken(user._id)
         })
     }
 });
@@ -64,6 +68,10 @@ const login = asyncHandler( async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            country: user?.country,
+            city: user?.city,
+            zipCode: user?.zipCode,
+            phone_number: user?.phone_number,
             token: generateToken(user._id)
         })
     } else {
@@ -100,8 +108,34 @@ const changePassword = asyncHandler( async (req, res) => {
     });
 })
 
+// Profile
+
+const getProfile = asyncHandler( async (req, res) => {
+    res.status(200).json(req.user);
+});
+
+// Update user
+
+const updateProfile = asyncHandler(async (req, res) => {
+    const body = req.body;
+    const id = req.user._id;
+    
+    const user = await User.findOne({ _id: id});
+
+    if (!user) {
+        throw new Error("User doesn't exist");
+    }
+
+    await User.findOneAndUpdate({ _id: id }, body);
+
+    res.status(201).json({ message: "Succesfuly updated" });
+
+})
+
 module.exports = {
     register,
     login,
-    changePassword
+    changePassword,
+    getProfile,
+    updateProfile,
 }

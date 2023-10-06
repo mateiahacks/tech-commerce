@@ -14,6 +14,18 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a password']
     },
+    country: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    phone_number: {
+        type: String,
+    },
+    zipCode: {
+        type: String,
+    }
 },
 {
     timestamps: true,
