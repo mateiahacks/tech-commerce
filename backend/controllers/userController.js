@@ -34,7 +34,7 @@ const register = asyncHandler( async (req, res) => {
     // Create user
     const user = await User.create({
         name, email, password: hashed,
-    }).select('-password');
+    });
 
     if(user) {
         res.status(201).json({
@@ -43,7 +43,7 @@ const register = asyncHandler( async (req, res) => {
             email: user.email,
             country: user?.country,
             city: user?.city,
-            zipCode: user?.zipCode,
+            postalCode: user?.postalCode,
             phone_number: user?.phone_number,
             token: generateToken(user._id)
         })
@@ -70,7 +70,7 @@ const login = asyncHandler( async (req, res) => {
             email: user.email,
             country: user?.country,
             city: user?.city,
-            zipCode: user?.zipCode,
+            postalCode: user?.postalCode,
             phone_number: user?.phone_number,
             token: generateToken(user._id)
         })
@@ -89,6 +89,7 @@ const changePassword = asyncHandler( async (req, res) => {
     const userId = req.user.id;
 
     if (!currentPassword || !newPassword) {
+        res.statusCode = 400;
         throw new Error('Please add all fields');
     }
 
@@ -96,6 +97,7 @@ const changePassword = asyncHandler( async (req, res) => {
 
     // check if current password matches user provided current password
     if (!await bcrypt.compare(currentPassword, user.password)) {
+        res.statusCode = 400;
         throw new Error("Invalid current password");
     }
 
@@ -120,7 +122,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     const body = req.body;
     const id = req.user._id;
     
-    const user = await User.findOne({ _id: id});
+    const user = await User.findOne({ _id: id}).select('-password');
 
     if (!user) {
         throw new Error("User doesn't exist");
@@ -128,7 +130,7 @@ const updateProfile = asyncHandler(async (req, res) => {
 
     await User.findOneAndUpdate({ _id: id }, body);
 
-    res.status(201).json({ message: "Succesfuly updated" });
+    res.status(201).json({ message: "Successfully updated" });
 
 })
 

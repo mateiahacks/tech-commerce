@@ -25,6 +25,11 @@ const productSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a image']
     },
+
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+     }
 },
 {
     timestamps: true,

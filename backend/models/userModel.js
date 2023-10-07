@@ -17,15 +17,23 @@ const userSchema = mongoose.Schema({
     country: {
         type: String,
     },
-    city: {
+    address: {
         type: String,
     },
     phone_number: {
         type: String,
     },
-    zipCode: {
+    postalCode: {
         type: String,
-    }
+    },
+    balance: {
+        type: Number,
+        default: 1000,
+    },
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+    }]
 },
 {
     timestamps: true,
