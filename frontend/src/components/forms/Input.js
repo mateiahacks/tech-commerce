@@ -8,9 +8,11 @@ export default function Input({
     handleChange,
     disabled,
     name,
+    labeled,
 }) {
   return (
     <StyledFormInput>
+        {labeled && <label>{placeholder}</label> }
         <input 
             type={type}
             placeholder={placeholder}

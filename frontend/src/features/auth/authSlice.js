@@ -35,6 +35,16 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     }
 });
 
+export const updateUser = createAsyncThunk('auth/update', async (user, thunkAPI) => {
+    try {
+        return await authService.updateUser(user);
+    } catch(error) {
+        const message = errorMessage(error);
+
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -91,8 +101,23 @@ export const authSlice = createSlice({
             state.message = action.payload;
             state.user = null;
         })
-        
+        .addCase(updateUser.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(updateUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = action.payload;
+            localStorage.setItem("user", JSON.stringify(action.payload));
+            state.isError = false;
+            toast.success("Successfuly updated");
 
+        })
+        .addCase(updateUser.rejected, (state, action) => {
+            state.isError = true;
+            state.isLoading = false;
+            state.message = action.payload.message;
+            toast.error("Error occured while updating");
+        })
     }
 });
 

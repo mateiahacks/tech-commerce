@@ -7,6 +7,7 @@ export const StyledNavbar = styled.nav`
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid gray;
+    position: relative;
 
     div {
         padding: 15px;
@@ -16,12 +17,15 @@ export const StyledNavbar = styled.nav`
 
     }
 
-    .cart-icon, .user-icon {
+    .cart-icon, .user-icon, .logout-icon {
         cursor: pointer;
     }
 
     .navbar-mid {
-
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .navbar-right {
