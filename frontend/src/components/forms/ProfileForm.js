@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CountrySelector from '../CountrySelector';
 import { updateUser } from '../../features/auth/authSlice';
 import { Loader } from '../styles/Global.styled';
+import { Link } from 'react-router-dom';
 
 export default function ProfileForm() {
   const { user } = useSelector(state => state.auth);
@@ -36,8 +37,6 @@ export default function ProfileForm() {
     e.preventDefault();
 
     dispatch(updateUser(formData));
-
-    console.log("data", formData);
   }
 
   return (
@@ -89,6 +88,7 @@ export default function ProfileForm() {
                 handleChange={handleChange}
                 labeled
             />
+            <Link to={'/reset_password'}><p>Reset password</p></Link>
             <Button>
                 {!isLoading && "Save"}
                 {isLoading && <Loader size={15} />}
