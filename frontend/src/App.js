@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import ResetPassword from './pages/ResetPassword';
+import CreateProduct from './pages/CreateProduct';
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -17,6 +18,7 @@ function App() {
         <Route path='/login' element={!user ? <Login /> : <Navigate to={'/'}/>}/>
         <Route path='/profile' element={user ? <Profile /> : <Navigate to={'/login'}/>}/>
         <Route path='/reset_password' element={user ? <ResetPassword /> : <Navigate to={'/login'}/>}/>
+        <Route path='/create_product' element={user ? <CreateProduct /> : <Navigate to={'/login'}/>}/>
       </Routes>
     </Router>
   );
