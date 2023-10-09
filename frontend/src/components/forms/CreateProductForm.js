@@ -6,6 +6,9 @@ import Api from '../../utils/Api';
 import Select from 'react-select';
 import {categories} from '../../utils/constants';
 import Button from './Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProduct } from '../../features/products/productSlice';
+import { Loader } from '../styles/Global.styled';
 
 export default function CreateProductForm() {
   const [image_url, set_image_url] = useState(null);
@@ -13,12 +16,26 @@ export default function CreateProductForm() {
   const options = useMemo(() => 
     categories.map((category, i) => ({ value: i, label: category }) ), []);
   
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector(state => state.products);
+  
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     price: '',
     category: '',
   });
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      description: '',
+      price: '',
+      category: '',
+    });
+    setOption('');
+    set_image_url(null);
+  }
 
   const { name, description, price } = formData;
 
@@ -59,6 +76,9 @@ export default function CreateProductForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    dispatch(createProduct({ ...formData, image_url: image_url }));
+
+    resetForm();
     console.log(formData);
   }
 
@@ -104,7 +124,8 @@ export default function CreateProductForm() {
           />
 
           <Button>
-            Save
+            {!isLoading && "Save"}
+            {isLoading && <Loader size={15}/>}
           </Button>
         </StyledForm>
     </StyledCreateProduct>

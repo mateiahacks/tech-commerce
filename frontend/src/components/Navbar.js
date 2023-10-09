@@ -26,6 +26,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className='navbar-right'>
+        <Link to={'/create_product'}>Create product</Link>
         <Link to={'/profile'}>
           <img 
             src='user.png' 

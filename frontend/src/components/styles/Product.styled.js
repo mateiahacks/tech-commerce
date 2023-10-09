@@ -39,3 +39,42 @@ export const ImageUpload = styled.div`
         }
     }
 `
+
+export const StyledProducts = styled.section`
+    width: 100%;
+    
+`
+
+export const ProductsContainer = styled.div`
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin: 50px;
+
+    .skeleton {
+        width: 280px;
+        height: 280px;
+    }
+`
+
+export const StyledProductCard = styled.div`
+    width: 300px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    
+
+    img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        object-position: center;
+        margin-bottom: 10px;
+    }
+`
