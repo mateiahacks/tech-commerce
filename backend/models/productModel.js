@@ -21,9 +21,8 @@ const productSchema = mongoose.Schema({
         required: [true, "Please add a category"]
     },
 
-    image: {
+    image_url: {
         type: String,
-        required: [true, 'Please add a image']
     },
 
     owner: {
