@@ -100,6 +100,21 @@ const getProduct = asyncHandler(async (req, res) => {
 
 });
 
+const editProduct = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const product = await Product.findOne({ _id: id });
+
+    console.log(req.body);
+
+    if (!product) {
+        throw new Error("Product with such id doesn't exist");
+    }
+
+    await Product.findOneAndUpdate({ _id: id }, req.body);
+
+    res.status(201).json({ message: "Successfully updated" });
+});
+
 
 const uploadImage = asyncHandler(async (req, res) => {
     const url = await generateUploadURL();
@@ -113,4 +128,5 @@ module.exports = {
     getProducts,
     getMyProducts,
     getProduct,
+    editProduct,
 }

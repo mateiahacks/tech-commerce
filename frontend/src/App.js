@@ -17,6 +17,7 @@ function App() {
         <Route path='/register' element={!user ? <Register /> : <Navigate to={'/'}/>}/>
         <Route path='/login' element={!user ? <Login /> : <Navigate to={'/'}/>}/>
         <Route path='/profile' element={user ? <Profile /> : <Navigate to={'/login'}/>}/>
+        <Route path='/product/:id' element={<CreateProduct />}/>
         <Route path='/reset_password' element={user ? <ResetPassword /> : <Navigate to={'/login'}/>}/>
         <Route path='/create_product' element={user ? <CreateProduct /> : <Navigate to={'/login'}/>}/>
       </Routes>

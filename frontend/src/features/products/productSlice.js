@@ -33,6 +33,18 @@ export const getProducts = createAsyncThunk("products/get", async (page, thunkAP
     }
 })
 
+export const updateProduct = createAsyncThunk("products/update", async (data, thunkAPI) => {
+    try {
+        return await productService.updateProduct(data);
+    } catch(error) {
+        const message = errorMessage(error);
+
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
+
+
 export const productSlice = createSlice({
     name: 'products',
     initialState,
@@ -67,6 +79,17 @@ export const productSlice = createSlice({
             state.isLoading = false;  
         })
         .addCase(getProducts.rejected, (state, action) => {
+            state.isLoading = false;
+            toast.error(action.payload);
+        })
+        .addCase(updateProduct.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(updateProduct.fulfilled, (state, action) => {
+            state.isLoading = false;
+            toast.success("Product updated successfully");
+        })
+        .addCase(updateProduct.rejected, (state, action) => {
             state.isLoading = false;
             toast.error(action.payload);
         })

@@ -78,3 +78,6 @@ export const StyledProductCard = styled.div`
         margin-bottom: 10px;
     }
 `
+export const StyledDetailed = styled.div`
+    margin: 0 auto;
+`

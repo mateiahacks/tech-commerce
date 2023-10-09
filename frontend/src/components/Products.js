@@ -5,6 +5,7 @@ import { getProducts, reset } from '../features/products/productSlice';
 import ProductCard from './ProductCard';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { Link } from 'react-router-dom';
 
 export default function Products() {
   const dispatch = useDispatch();
@@ -21,11 +22,13 @@ export default function Products() {
       <ProductsContainer>
         {isLoading && 
           skeletons.map((i) => 
-            <Skeleton className='skeleton'/>
+            <Skeleton className='skeleton' key={i}/>
           )
         }
         {products?.map((product) => 
-          <ProductCard product={product}/>
+          <Link to={"/product/"+product._id} key={product._id} className='link'>
+            <ProductCard product={product}/>
+          </Link>
         )}
       </ProductsContainer>
     </StyledProducts>

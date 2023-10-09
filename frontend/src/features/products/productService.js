@@ -19,9 +19,18 @@ const getProducts = async (page) => {
     return response.data;
 }
 
+const updateProduct = async (productData) => {
+    const response = await Api.put(`${API_URL}/${productData.id}`,  { ...productData, id: null });
+
+    if(!response) return;
+
+    return response.data;
+}
+
 const productService = {
     createProduct,
     getProducts,
+    updateProduct,
 }
 
 export default productService;

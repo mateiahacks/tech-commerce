@@ -20,8 +20,9 @@ export const Loader = styled.div`
 
     width: ${(props) => props.size}px;
     aspect-ratio: 1;
+    margin: auto;
     border: 1px solid #FFF;
-    border-bottom-color: transparent;
+    border-bottom-color: black;
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
