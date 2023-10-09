@@ -11,8 +11,8 @@ const createProduct = async (productData) => {
     return response.data;
 }
 
-const getProducts = async (page) => {
-    const response = await Api.get(API_URL, { page });
+const getProducts = async (params) => {
+    const response = await Api.get(API_URL, params);
 
     if (!response) return;
 

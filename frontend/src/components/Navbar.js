@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { StyledNavbar } from './styles/Navbar.styled'
 import { logout } from '../features/auth/authSlice';
+import { categories } from '../utils/constants';
 import user from '../assets/user.png';
 import cart from '../assets/cart.png';
 import logo from '../assets/logo.png';
 import logout_icon from '../assets/logout.png';
-
+import Dropdown from './Dropdown';
+import { getProducts, reset } from '../features/products/productSlice';
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const onSelectCategory = (value) => {
+    setSelectedCategory((prev) => {
+      dispatch(reset());
+      if (value === "All") {
+        dispatch(getProducts());
+        return value;
+      }
+      dispatch(getProducts({category: value }));
+      return value;
+    });
+  }
 
   const onLogout = () => {
     dispatch(logout());
@@ -21,7 +37,12 @@ export default function Navbar() {
   return (
     <StyledNavbar>
       <div className='navbar-left'>
-        left
+        <Dropdown 
+          options={["All", ...categories]}
+          placeholder={'Filter by category'}
+          handleChange={onSelectCategory}
+          value={selectedCategory}
+        />
       </div>
       <div className='navbar-mid'>
         <Link to='/'>

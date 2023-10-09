@@ -23,9 +23,9 @@ export const createProduct = createAsyncThunk("products/create", async (product,
     }
 });
 
-export const getProducts = createAsyncThunk("products/get", async (page, thunkAPI) => {
+export const getProducts = createAsyncThunk("products/get", async (params, thunkAPI) => {
     try {
-        return await productService.getProducts(page);
+        return await productService.getProducts(params);
     } catch(error) {
         const message = errorMessage(error);
 

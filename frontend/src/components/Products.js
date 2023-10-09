@@ -14,7 +14,7 @@ export default function Products() {
 
   useEffect(() => {
     dispatch(reset());
-    dispatch(getProducts(1));
+    dispatch(getProducts());
   }, [dispatch]);
 
   return (

@@ -20,12 +20,13 @@ const createProduct = asyncHandler(async (req, res) => {
 const getProducts = asyncHandler(async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
     const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
+    const category = req.query.category;
 
     try {
         const skip = (page - 1) * limit;
 
-        const totalProducts = await Product.countDocuments({});
-        const products = await Product.find({})
+        const totalProducts = await Product.countDocuments(category ? {category: category}:{});
+        const products = await Product.find(category ? {category: category}:{})
         .skip(skip)
         .limit(limit);
 

@@ -6,15 +6,17 @@ export const StyledNavbar = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid gray;
     position: relative;
+
+    .mySelect__value-container{
+        height: -80px;
+        }
 
     div {
         padding: 15px;
     }
 
     .navbar-left {
-
     }
 
     .cart-icon, .user-icon, .logout-icon {
