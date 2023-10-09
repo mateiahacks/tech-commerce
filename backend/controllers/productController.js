@@ -87,6 +87,19 @@ const getMyProducts = asyncHandler(async (req, res) => {
     }
 });
 
+const getProduct = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const product = await Product.findOne({ _id: id });
+
+    if (!product) {
+        res.status(400);
+        throw new Error("Product with such id doesn't exist");
+    }
+
+    res.status(200).json(product);
+
+});
+
 
 const uploadImage = asyncHandler(async (req, res) => {
     const url = await generateUploadURL();
@@ -99,4 +112,5 @@ module.exports = {
     uploadImage,
     getProducts,
     getMyProducts,
+    getProduct,
 }
