@@ -12,7 +12,6 @@ export default function Orders() {
     async function fetchData() {
       const response = await Api.get("/api/orders");
       setOrders(response.data);
-      console.log(response.data);
     }
     fetchData();
   }, []);
