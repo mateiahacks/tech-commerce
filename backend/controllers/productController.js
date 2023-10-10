@@ -21,12 +21,16 @@ const getProducts = asyncHandler(async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
     const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
     const category = req.query.category;
+    const mine = req.query.mine;
+
+    let query = category ? {category: category}:{};
+    query = mine ? {owner: req.user._id} : query;
 
     try {
         const skip = (page - 1) * limit;
 
-        const totalProducts = await Product.countDocuments(category ? {category: category}:{});
-        const products = await Product.find(category ? {category: category}:{})
+        const totalProducts = await Product.countDocuments(query);
+        const products = await Product.find(query)
         .skip(skip)
         .limit(limit);
 

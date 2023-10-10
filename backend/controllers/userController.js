@@ -43,6 +43,7 @@ const register = asyncHandler( async (req, res) => {
             email: user.email,
             country: user?.country,
             city: user?.city,
+            balance: user?.balance,
             postalCode: user?.postalCode,
             phone_number: user?.phone_number,
             token: generateToken(user._id)
@@ -70,6 +71,7 @@ const login = asyncHandler( async (req, res) => {
             email: user.email,
             country: user?.country,
             city: user?.city,
+            balance: user?.balance,
             postalCode: user?.postalCode,
             phone_number: user?.phone_number,
             token: generateToken(user._id)

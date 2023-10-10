@@ -10,12 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createProduct, updateProduct } from '../../features/products/productSlice';
 import { Loader } from '../styles/Global.styled';
 import { useParams } from 'react-router-dom';
+import { add } from '../../features/cart/cartSlice';
 
 export default function CreateProductForm() {
   const [image_url, set_image_url] = useState(null);
   const [option, setOption] = useState('');
   const [fetching, setFetching] = useState(false);
   const [isMe, setIsMe] = useState(false);
+  const [product, setProduct] = useState({});
   const user = useSelector(state => state.auth.user);
 
   const options = useMemo(() => 
@@ -38,6 +40,8 @@ export default function CreateProductForm() {
       setFetching(true);
       let product = await Api.get(`/api/products/${id}`);
       setFetching(false);
+
+      setProduct(product.data);
 
       product = product.data;
       setOption({value: "fasf", label: product.category});
@@ -100,11 +104,18 @@ export default function CreateProductForm() {
     setOption(value);
   }
 
+  const onAddToCart = () => {
+    dispatch(add(product));
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!id) {
       dispatch(createProduct({ ...formData, image_url: image_url }));
       resetForm();
+    } 
+    if (!isMe) {
+      onAddToCart();
     } else {
       dispatch(updateProduct({ ...formData, image_url: image_url, id: id }));
     }
@@ -164,8 +175,8 @@ export default function CreateProductForm() {
               {isLoading && <Loader size={15}/>}
             </Button> }
             {!isMe && 
-            <Button>
-              Checkout
+            <Button onClick={onAddToCart}>
+              Add to cart
             </Button> }
           </StyledForm>
       </StyledCreateProduct> }

@@ -19,7 +19,7 @@ export default function ProfileForm() {
   const dispatch = useDispatch();
   const { isLoading } = useSelector(state => state.auth);
 
-  const { name, email, country, postalCode, phone_number, address } = formData;
+  const { name, email, country, postalCode, phone_number, address, balance } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,6 +87,15 @@ export default function ProfileForm() {
                 value={phone_number ? phone_number : ''}
                 handleChange={handleChange}
                 labeled
+            />
+            <Input 
+                placeholder={'Balance'}
+                name={'balance'}
+                type={'number'}
+                value={balance ? balance : ''}
+                handleChange={handleChange}
+                labeled
+                disabled
             />
             <Link to={'/reset_password'}><p>Reset password</p></Link>
             <Button>

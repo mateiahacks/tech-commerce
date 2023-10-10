@@ -49,7 +49,7 @@ export const ProductsContainer = styled.div`
     display: flex;
     gap: 60px;
     flex-wrap: wrap;
-    margin: 50px;
+    margin: 40px;
 
     .skeleton {
         width: 280px;
@@ -64,11 +64,23 @@ export const StyledProductCard = styled.div`
     flex-direction: column;
     padding: 20px;
     border-radius: 5px;
+    position: relative;
 
     &:hover {
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 15px 35px 0px;
+
+        .add-cart-icon {
+            display: block;
+        }
     }
     
+    .add-cart-icon {
+        position: absolute;
+        width: 70px;
+        right: 30px;
+        bottom: 65px;
+        display: none;
+    }
 
     img {
         width: 100%;

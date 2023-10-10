@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { StyledNavbar } from './styles/Navbar.styled'
 import { logout } from '../features/auth/authSlice';
 import { categories } from '../utils/constants';
@@ -17,9 +17,15 @@ export default function Navbar() {
 
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const { count } = useSelector(state => state.cart);
+
   const onSelectCategory = (value) => {
     setSelectedCategory((prev) => {
       dispatch(reset());
+      if (value === "My products") {
+        dispatch(getProducts({ mine: true }));
+        return value;
+      }
       if (value === "All") {
         dispatch(getProducts());
         return value;
@@ -38,7 +44,7 @@ export default function Navbar() {
     <StyledNavbar>
       <div className='navbar-left'>
         <Dropdown 
-          options={["All", ...categories]}
+          options={["All", "My products", ...categories]}
           placeholder={'Filter by category'}
           handleChange={onSelectCategory}
           value={selectedCategory}
@@ -60,13 +66,17 @@ export default function Navbar() {
             className='user-icon'
             width={20}/>
         </Link>  
-        <div>
+        <Link to={'/cart'}>
+        <div className='cart-icon-container'>
           <img 
             src={cart}
             alt='cart-icon' 
             className='cart-icon'
             width={20}/>
+            {count !== 0 && 
+            <div className='cart-count'>{ count }</div> }
         </div>
+        </Link>
         <img 
           src={logout_icon}
           alt='logout-icon' 

@@ -26,7 +26,7 @@ export default function Products() {
           )
         }
         {products?.map((product) => 
-          <Link to={"/product/"+product._id} key={product._id} className='link'>
+          <Link to={"/product/"+product._id} key={product._id} className='link' >
             <ProductCard product={product}/>
           </Link>
         )}

@@ -29,6 +29,7 @@ export const DropdownList = styled.div`
     width: 100%;
     background-color: white;
     color: black;
+    z-index: 1;
 
     div {
         width: 100%;
