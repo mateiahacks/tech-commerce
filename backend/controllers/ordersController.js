@@ -8,6 +8,7 @@ const createOrder = asyncHandler(async (req, res) => {
     const result = {
         ...req.body,
         owner: user._id,
+        cost: req.body.cost,
     }
 
     const owner = await User.findOne({_id: user._id});
@@ -16,7 +17,7 @@ const createOrder = asyncHandler(async (req, res) => {
 
     await owner.save();
     
-    await Order.createOrder(result);
+    await Order.create(result);
 
     res.status(201).json(result);
 });

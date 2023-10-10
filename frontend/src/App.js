@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import ResetPassword from './pages/ResetPassword';
 import CreateProduct from './pages/CreateProduct';
 import Cart from './pages/Cart';
+import Orders from './pages/Orders';
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -22,6 +23,7 @@ function App() {
         <Route path='/reset_password' element={user ? <ResetPassword /> : <Navigate to={'/login'}/>}/>
         <Route path='/create_product' element={user ? <CreateProduct /> : <Navigate to={'/login'}/>}/>
         <Route path='/cart' element={user ? <Cart /> : <Navigate to={'/login'}/>}/>
+        <Route path='/orders' element={user ? <Orders /> : <Navigate to={'/login'}/>}/>
       </Routes>
     </Router>
   );

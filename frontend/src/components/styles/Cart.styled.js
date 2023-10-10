@@ -2,12 +2,25 @@ import styled from 'styled-components';
 
 export const CartContainer = styled.div`
     margin: 50px;
+
+    .order-button {
+        width: 250px;
+        height: 40px;
+        background-color: var(--primaryGreen);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 40px;
+        cursor: pointer;
+    }
 `
 export const CartItemsContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 40px;
     margin-top: 50px;
+    margin-bottom: 50px;
 `
 export const StyledCartItem = styled.div`
     width: 50%;
@@ -43,3 +56,16 @@ export const CartItemRight = styled.div`
         object-fit: cover;
     }
 `
+
+export const OrdersContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 50px;
+
+    .order {
+        border-top: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 10px;
+    }
+`  

@@ -45,6 +45,16 @@ export const updateUser = createAsyncThunk('auth/update', async (user, thunkAPI)
     }
 });
 
+export const getProfile = createAsyncThunk('auth/profile/get', async (_, thunkAPI) => {
+    try {
+        return await authService.getProfile();
+    } catch(error) {
+        const message = errorMessage(error);
+
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -62,6 +72,12 @@ export const authSlice = createSlice({
             state.isSuccess = false;
             state.user = null;
             state.message = '';
+        },
+        spend: (state, action) => {
+            state.user.balance -= action.payload; 
+        },
+        setUser: (state, action) => {
+            state.user = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -118,8 +134,11 @@ export const authSlice = createSlice({
             state.message = action.payload.message;
             toast.error("Error occured while updating");
         })
+        .addCase(getProfile.fulfilled, (state, action) => {
+            state.user = action.payload;
+        })
     }
 });
 
-export const { reset, logout } = authSlice.actions;
+export const { reset, logout, spend, setUser } = authSlice.actions;
 export default authSlice.reducer;

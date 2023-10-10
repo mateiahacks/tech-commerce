@@ -35,10 +35,19 @@ const updateUser = async (userData) => {
     return userData;
 }
 
+const getProfile = async () => {
+    const response = await Api.get(API_URL + "/profile");
+
+    if(!response) return;
+    
+    return response.data;
+}
+
 const authService = {
     register,
     login,
     updateUser,
+    getProfile
 }
 
 export default authService;

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyledProfile } from '../styles/Profile.styled'
 import { StyledForm } from '../styles/Forms.styled'
 import Input from './Input';
 import Button from './Button';
 import { useDispatch, useSelector } from 'react-redux';
 import CountrySelector from '../CountrySelector';
-import { updateUser } from '../../features/auth/authSlice';
+import { getProfile, updateUser } from '../../features/auth/authSlice';
 import { Loader } from '../styles/Global.styled';
 import { Link } from 'react-router-dom';
 
@@ -38,6 +38,14 @@ export default function ProfileForm() {
 
     dispatch(updateUser(formData));
   }
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFormData(user);
+  }, [user]);
 
   return (
     <StyledProfile>
@@ -98,6 +106,7 @@ export default function ProfileForm() {
                 disabled
             />
             <Link to={'/reset_password'}><p>Reset password</p></Link>
+            <Link to={'/orders'}><p>My orders</p></Link>
             <Button>
                 {!isLoading && "Save"}
                 {isLoading && <Loader size={15} />}
