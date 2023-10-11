@@ -9,6 +9,10 @@ export const StyledNavbar = styled.nav`
     position: relative;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 20px 0px;
 
+    .navbar-right-sm {
+        display: none;
+    }
+
     div {
         padding: 15px;
     }
@@ -56,12 +60,14 @@ export const StyledNavbar = styled.nav`
     }
 
     .menu-icon {
-        display: none;
+        width: 30px;
+        cursor: pointer;
     }
 
     @media only screen and (max-width: 1000px) {
         & {
             position: relative;
+            padding: 10px 5px;
         }
         .navbar-left {
             flex-direction: column;
@@ -71,18 +77,36 @@ export const StyledNavbar = styled.nav`
             display: ${props => props.shouldBeSearch ? "none" : "block"};
         }
 
-        .navbar-right {
+        .navbar-right-sm {
             position: absolute;
+            display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             right: 0px;
-            top: 0px;
+            top: 50px;
+            gap: 10px;
             background-color: white;
             z-index: 2;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 20px 0px;
         }
 
+        .navbar-right {
+            display: none;
+        }
+
         .menu-icon {
             display: block;
+        }
+    }
+
+    @media only screen and (min-width: 1000px) {
+        .navbar-right-sm {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
         }
     }
 `

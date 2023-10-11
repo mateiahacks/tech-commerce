@@ -8,13 +8,16 @@ import user from '../assets/user.png';
 import cart from '../assets/cart.png';
 import logo from '../assets/logo.png';
 import logout_icon from '../assets/logout.png';
+import menu from '../assets/menu.png';
 import Dropdown from './Dropdown';
 import { SearchInput } from './styles/Dropdown.styled';
 import { getProducts, reset } from '../features/products/productSlice';
+import useToggle from '../hooks/useToggle';
 
 export default function Navbar({ shouldBeSearch }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [open, toggleOpen] = useToggle(false);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -99,6 +102,40 @@ export default function Navbar({ shouldBeSearch }) {
           onClick={onLogout}
           width={20}/>
       </div>
+      <img 
+        src={menu}
+        alt='menu'
+        className='menu-icon'
+        onClick={toggleOpen}
+      />
+      {open && 
+      <div className='navbar-right-sm'>
+        <Link to={'/create_product'}>Create product</Link>
+        <Link to={'/profile'}>
+          <img 
+            src={user}
+            alt='user-icon' 
+            className='user-icon'
+            width={20}/>
+        </Link>  
+        <Link to={'/cart'}>
+        <div className='cart-icon-container'>
+          <img 
+            src={cart}
+            alt='cart-icon' 
+            className='cart-icon'
+            width={20}/>
+            {count !== 0 && 
+            <div className='cart-count'>{ count }</div> }
+        </div>
+        </Link>
+        <img 
+          src={logout_icon}
+          alt='logout-icon' 
+          className='logout-icon'
+          onClick={onLogout}
+          width={20}/>
+      </div>}
     </StyledNavbar>
   )
 }

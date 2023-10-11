@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledDropdown = styled.div`
-    width: 155px;
+    width: fit-content;
     height: 40px;
     color: white;
     background-color: var(--primaryGreen);
@@ -58,6 +58,8 @@ export const SearchInput = styled.input`
     border: 1px solid var(--primaryGreen);
     padding: 0 10px;
     width: 155px;
+    height: 40px;
+    font-size: 12px;
 
     &:focus {
         outline: none;

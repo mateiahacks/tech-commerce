@@ -58,6 +58,10 @@ export const ProductsContainer = styled.div`
         width: 280px;
         height: 280px;
     }
+
+    @media only screen and (max-width: 1000px) {
+        justify-content: center;
+    }
 `
 
 export const StyledProductCard = styled.div`
