@@ -12,7 +12,7 @@ import Dropdown from './Dropdown';
 import { SearchInput } from './styles/Dropdown.styled';
 import { getProducts, reset } from '../features/products/productSlice';
 
-export default function Navbar() {
+export default function Navbar({ shouldBeSearch }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,8 +48,10 @@ export default function Navbar() {
   }
 
   return (
-    <StyledNavbar>
+    <StyledNavbar shouldBeSearch={shouldBeSearch}>
       <div className='navbar-left'>
+        {shouldBeSearch &&
+         <>
         <Dropdown 
           options={["All", "My products", ...categories]}
           placeholder={'Filter by category'}
@@ -61,6 +63,7 @@ export default function Navbar() {
           placeholder="Search by name"
           onChange={onSearch}
         />
+        </> }
       </div>
       <div className='navbar-mid'>
         <Link to='/'>

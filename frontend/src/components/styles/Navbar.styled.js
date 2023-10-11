@@ -9,10 +9,6 @@ export const StyledNavbar = styled.nav`
     position: relative;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 20px 0px;
 
-    .mySelect__value-container{
-        height: -80px;
-        }
-
     div {
         padding: 15px;
     }
@@ -59,12 +55,34 @@ export const StyledNavbar = styled.nav`
         right: 8px;
     }
 
+    .menu-icon {
+        display: none;
+    }
+
     @media only screen and (max-width: 1000px) {
-        .navbar-mid {
-            display: none;
+        & {
+            position: relative;
         }
         .navbar-left {
             flex-direction: column;
+        }
+
+        .navbar-mid {
+            display: ${props => props.shouldBeSearch ? "none" : "block"};
+        }
+
+        .navbar-right {
+            position: absolute;
+            flex-direction: column;
+            right: 0px;
+            top: 0px;
+            background-color: white;
+            z-index: 2;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 20px 0px;
+        }
+
+        .menu-icon {
+            display: block;
         }
     }
 `

@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
                     } else {
                         arr[i].cnt--;
                     }
-                    state.price -= item.product.price;
+                    state.cost -= item.product.price;
                 }
             }
 

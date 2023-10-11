@@ -6,7 +6,7 @@ import Products from '../components/Products'
 export default function Home() {
   return (
     <Page>
-        <Navbar />
+        <Navbar shouldBeSearch={true}/>
         <Products />
     </Page>
   )
