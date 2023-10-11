@@ -84,7 +84,7 @@ export const StyledNavbar = styled.nav`
             align-items: center;
             justify-content: center;
             right: 0px;
-            top: 50px;
+            top: 90px;
             gap: 10px;
             background-color: white;
             z-index: 2;
