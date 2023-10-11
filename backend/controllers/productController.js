@@ -123,6 +123,24 @@ const editProduct = asyncHandler(async (req, res) => {
     res.status(201).json({ message: "Successfully updated" });
 });
 
+const deleteProduct = asyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+
+    if(product.owner._id.toString() !== req.user._id.toString()) {
+        res.status(400);
+        throw new Error("Incorrect user");
+    }
+
+    if(!product) {
+        res.status(400);
+        throw new Error("Post not found");
+    }
+
+    await Product.deleteOne({ _id: productId });
+    res.json({ msg: "Product removed successfully" });
+})
+
 
 const uploadImage = asyncHandler(async (req, res) => {
     const url = await generateUploadURL();
@@ -137,4 +155,5 @@ module.exports = {
     getMyProducts,
     getProduct,
     editProduct,
+    deleteProduct,
 }
