@@ -9,6 +9,7 @@ import cart from '../assets/cart.png';
 import logo from '../assets/logo.png';
 import logout_icon from '../assets/logout.png';
 import Dropdown from './Dropdown';
+import { SearchInput } from './styles/Dropdown.styled';
 import { getProducts, reset } from '../features/products/productSlice';
 
 export default function Navbar() {
@@ -35,6 +36,12 @@ export default function Navbar() {
     });
   }
 
+  const onSearch = (event) => {
+    setSelectedCategory(null);
+    dispatch(reset());
+    dispatch(getProducts({ name: event.target.value }))
+  }
+
   const onLogout = () => {
     dispatch(logout());
     navigate('/');
@@ -48,6 +55,11 @@ export default function Navbar() {
           placeholder={'Filter by category'}
           handleChange={onSelectCategory}
           value={selectedCategory}
+        />
+        <SearchInput
+          type="text"
+          placeholder="Search by name"
+          onChange={onSearch}
         />
       </div>
       <div className='navbar-mid'>

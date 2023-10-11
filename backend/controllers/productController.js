@@ -22,9 +22,12 @@ const getProducts = asyncHandler(async (req, res) => {
     const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
     const category = req.query.category;
     const mine = req.query.mine;
+    const searchWord = req.query.name;
 
     let query = category ? {category: category}:{};
-    query = mine ? {owner: req.user._id} : query;
+    query = mine ? {...query, owner: req.user._id} : query;
+    const regex = RegExp(searchWord, 'i');
+    query = searchWord ? {name: {$regex: regex}} : query;
 
     try {
         const skip = (page - 1) * limit;

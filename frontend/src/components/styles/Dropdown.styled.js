@@ -1,14 +1,22 @@
 import styled from 'styled-components';
 
 export const StyledDropdown = styled.div`
-    width: 200px;
-    height: 50px;
+    width: 155px;
+    height: 40px;
     color: white;
     background-color: var(--primaryGreen);
     padding: 0;
     display: flex;
     align-items: center;
     position: relative;
+    font-size: 12px;
+
+    @media only screen and (max-width: 1000px) {
+        & {
+            font-size: 12px;
+            
+        }
+    }
 `
 export const DropdownSelector = styled.div`
     width: 100%;
@@ -18,6 +26,7 @@ export const DropdownSelector = styled.div`
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
     cursor: pointer;
 `
 
@@ -40,5 +49,17 @@ export const DropdownList = styled.div`
         background-color: var(--primaryGreen);
         color: white;
         cursor: pointer;
+    }
+
+    
+`
+
+export const SearchInput = styled.input`
+    border: 1px solid var(--primaryGreen);
+    padding: 0 10px;
+    width: 155px;
+
+    &:focus {
+        outline: none;
     }
 `

@@ -18,6 +18,8 @@ export const StyledNavbar = styled.nav`
     }
 
     .navbar-left {
+        display: flex;
+        
     }
 
     .cart-icon, .user-icon, .logout-icon {
@@ -55,5 +57,14 @@ export const StyledNavbar = styled.nav`
         border-radius: 50%;
         top: 13px;
         right: 8px;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .navbar-mid {
+            display: none;
+        }
+        .navbar-left {
+            flex-direction: column;
+        }
     }
 `
