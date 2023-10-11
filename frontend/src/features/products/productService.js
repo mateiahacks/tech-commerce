@@ -27,10 +27,19 @@ const updateProduct = async (productData) => {
     return response.data;
 }
 
+const deleteProduct = async (id) => {
+    const response = await Api.delete(`${API_URL}/${id}`);
+
+    if (!response) return;
+
+    return id;
+}
+
 const productService = {
     createProduct,
     getProducts,
     updateProduct,
+    deleteProduct,
 }
 
 export default productService;

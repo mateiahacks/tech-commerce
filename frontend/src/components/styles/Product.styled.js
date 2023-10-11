@@ -25,12 +25,15 @@ export const ImageUpload = styled.div`
     display: flex;
     flex-direction: column;
 
-    img {
+    .product-image {
         border: 1px solid gray;
         width: 200px;
         aspect-ratio: 1;
         object-fit: contain;
         object-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     @media only screen and (max-width: 800px) {
@@ -82,12 +85,19 @@ export const StyledProductCard = styled.div`
         display: none;
     }
 
-    img {
+    .product-image {
         width: 100%;
         aspect-ratio: 1;
         object-fit: cover;
         object-position: center;
         margin-bottom: 10px;
+    }
+
+    .bin-icon {
+        width: 20px;
+        position: absolute;
+        right: 20px;
+        bottom: 40px;
     }
 `
 export const StyledDetailed = styled.div`

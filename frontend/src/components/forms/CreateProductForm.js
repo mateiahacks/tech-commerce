@@ -18,6 +18,7 @@ export default function CreateProductForm() {
   const [fetching, setFetching] = useState(false);
   const [isMe, setIsMe] = useState(false);
   const [product, setProduct] = useState({});
+  const [uploading, setUploading] = useState(false);
   const user = useSelector(state => state.auth.user);
 
   const options = useMemo(() => 
@@ -75,7 +76,9 @@ export default function CreateProductForm() {
     const file = event.target.files[0];
     formData.append("image", file);
 
+    setUploading(true);
     const res = await Api.get("/api/products/upload_image");
+    
     const url = res.data.url;
 
     await fetch(url, {
@@ -85,7 +88,7 @@ export default function CreateProductForm() {
         },
         body: file,
     });
-
+    setUploading(false);
     const imageUrl = url.split('?')[0];
     set_image_url(imageUrl);
 
@@ -116,7 +119,8 @@ export default function CreateProductForm() {
     } 
     if (!isMe) {
       onAddToCart();
-    } else {
+    } 
+    else if (id) {
       dispatch(updateProduct({ ...formData, image_url: image_url, id: id }));
     }
   }
@@ -127,11 +131,15 @@ export default function CreateProductForm() {
       <Loader size={100}/> :
       <StyledCreateProduct>
           <ImageUpload>
-            <img 
+            <div className='product-image'>
+            {!uploading &&
+             <img 
               src={image_url ? image_url : 'image-placeholder.png'}
               alt='product'
               className='product-image'
-            />
+            /> }
+            {uploading && <Loader size={50}/>}
+            </div>
             {isMe &&  <input 
               type='file'
               onChange={onUpload}

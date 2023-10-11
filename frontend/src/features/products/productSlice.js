@@ -43,6 +43,15 @@ export const updateProduct = createAsyncThunk("products/update", async (data, th
     }
 })
 
+export const deleteProduct = createAsyncThunk("products/delete", async (id, thunkAPI) => {
+    try {
+        return await productService.deleteProduct(id);
+    } catch(error) {
+        const message = errorMessage(error);
+
+        return thunkAPI.rejectWithValue(message);
+    }
+})
 
 
 export const productSlice = createSlice({
@@ -93,6 +102,14 @@ export const productSlice = createSlice({
             state.isLoading = false;
             toast.error(action.payload);
         })
+        .addCase(deleteProduct.fulfilled, (state, action) => {
+            const id = action.payload;
+            state.products = state.products.filter((i) => i._id !== id);
+            toast.success("Successfully deleted");
+        })
+        .addCase(deleteProduct.rejected, (state, action) => {
+            toast.error(action.payload);
+        });
     }
 });
 
