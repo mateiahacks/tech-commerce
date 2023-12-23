@@ -3,7 +3,8 @@ Tech-Commerce
 
 Fullstack E-commerce application built with Express and React. Deployed on render.
 
-* Engineered Fullstack E-commerce application with Express, React, and MongoDB.
+* Constructed database models with mongoose for MongoDB.
+* Configured AWS s3 bucket service for image uploading.
 * Developed REST API and Implemented JWT for secure user authentication in Express.
 * Utilized Redux Toolkit for efficient state management.
 * Incorporated Pagination for seamless content navigation.
