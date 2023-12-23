@@ -4,7 +4,7 @@ Tech-Commerce
 Fullstack E-commerce application built with Express and React. Deployed on render.
 
 * Engineered Fullstack E-commerce application with Express, React, and MongoDB.
-* Implemented JWT Authorization for secure user authentication.
+* Developed REST API and Implemented JWT for secure user authentication in Express.
 * Utilized Redux Toolkit for efficient state management.
 * Incorporated Pagination for seamless content navigation.
 * Designed responsive UI using Styled-Components for enhanced user experience.
